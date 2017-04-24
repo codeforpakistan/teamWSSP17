@@ -16,9 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zeeroapps.wssp.Model.ModelComplaints;
 import com.zeeroapps.wssp.R;
@@ -85,14 +87,17 @@ public class MyComplaintsFragment extends Fragment {
     public void getDataFromDB(){
         avi.show();
 
-        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(ConfigWS.URL_MY_COMPLAINTS, new Response.Listener<JSONArray>() {
+
+        StringRequest jsonReq = new StringRequest(Request.Method.POST, ConfigWS.URL_MY_COMPLAINTS, new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONArray response) {
-                Log.e(TAG, "Array Response: "+response );
-                ModelComplaints complaint;
+            public void onResponse(String response) {
+                Log.e(TAG, "Response: "+response );
                 try {
-                    for (int i=0; i<response.length(); i++ ) {
-                        JSONObject jObj = response.getJSONObject(i);
+                JSONArray jArr = new JSONArray(response);
+                ModelComplaints complaint;
+
+                    for (int i=0; i<jArr.length(); i++ ) {
+                        JSONObject jObj = jArr.getJSONObject(i);
                         Log.e(TAG, "Object In Array Response: " + jObj);
                         complaint = new ModelComplaints();
                         complaint.setcImageUrl(jObj.getString("image_path"));
@@ -109,7 +114,6 @@ public class MyComplaintsFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e(TAG, e.toString());
-
                 }
 
                 avi.hide();
@@ -119,22 +123,87 @@ public class MyComplaintsFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "onErrorResponse: "+error );
                 if (error.toString().contains("NoConnectionError")) {
-                    Snackbar.make(layoutMain, "Error in connection!", Snackbar.LENGTH_INDEFINITE).setActionTextColor(Color.RED).show();
+                    Snackbar.make(layoutMain, "Error in connection!", Snackbar.LENGTH_LONG).setActionTextColor(Color.RED).show();
                 } else {
-                    Snackbar.make(layoutMain, "Webservice not responding!", Snackbar.LENGTH_INDEFINITE).setActionTextColor(Color.RED).show();
+                    Snackbar.make(layoutMain, "Webservice not responding!", Snackbar.LENGTH_LONG).setActionTextColor(Color.RED).show();
                 }
                 avi.hide();
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("mobilenumber", sp.getString(getString(R.string.spUMobile), null));
+
                 return params;
             }
         };
 
-        AppController.getInstance().addToRequestQueue(jsonArrayRequest, JSON_TAG);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//
+//        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, ConfigWS.URL_MY_COMPLAINTS, null, new Response.Listener<JSONArray>() {
+//            @Override
+//            public void onResponse(JSONArray response) {
+//                Log.e(TAG, "Array Response: "+response );
+//                ModelComplaints complaint;
+//                try {
+//                    for (int i=0; i<response.length(); i++ ) {
+//                        JSONObject jObj = response.getJSONObject(i);
+//                        Log.e(TAG, "Object In Array Response: " + jObj);
+//                        complaint = new ModelComplaints();
+//                        complaint.setcImageUrl(jObj.getString("image_path"));
+//                        complaint.setcNumber(jObj.getString("c_number"));
+//                        complaint.setcStatus(jObj.getString("status"));
+//                        complaint.setcDateAndTime(jObj.getString("c_date_time"));
+//                        complaint.setcDetail(jObj.getString("c_details"));
+//                        complaint.setcType(jObj.getString("c_type"));
+//                        complaint.setcAddress(jObj.getString("bin_address"));
+//                        compList.add(complaint);
+//                    }
+//
+//                    customAdapter.notifyDataSetChanged();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                    Log.e(TAG, e.toString());
+//                }
+//
+//                avi.hide();
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.e(TAG, "onErrorResponse: "+error );
+//                if (error.toString().contains("NoConnectionError")) {
+//                    Snackbar.make(layoutMain, "Error in connection!", Snackbar.LENGTH_LONG).setActionTextColor(Color.RED).show();
+//                } else {
+//                    Snackbar.make(layoutMain, "Webservice not responding!", Snackbar.LENGTH_LONG).setActionTextColor(Color.RED).show();
+//                }
+//                avi.hide();
+//            }
+//        }){
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("mobilenumber", sp.getString(getString(R.string.spUMobile), null));
+//                return params;
+//            }
+//        };
+
+        AppController.getInstance().addToRequestQueue(jsonReq, JSON_TAG);
     }
 
 

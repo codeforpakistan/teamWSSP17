@@ -22,6 +22,7 @@ import com.zeeroapps.wssp.utils.AppController;
 import com.zeeroapps.wssp.utils.ConfigWS;
 import com.zeeroapps.wssp.utils.SHA1;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -106,12 +107,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     JSONObject jObj = new JSONObject(response.toString());
                     String status = jObj.getString("status");
 
-                    Snackbar.make(mainLayout, status, Snackbar.LENGTH_LONG).show();
+//                    Snackbar.make(mainLayout, status, Snackbar.LENGTH_LONG).show();
                     if (status.toLowerCase().contains("success")) {
-                        spEdit.putString(getString(R.string.spUMobile), jObj.getString("mobilenumber"));
-                        spEdit.putString(getString(R.string.spUPass), jObj.getString("is_logged_in"));
-                        spEdit.commit();
-
                         getMemberDetailsWS();
 
 //                        Intent intent = new Intent(LoginActivity.this, DrawerActivity.class);
@@ -121,6 +118,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                avi.hide();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -142,24 +140,29 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 return params;
             }
         };
-
         AppController.getInstance().addToRequestQueue(jsonReq, tag_json_obj);
     }
 
     public void getMemberDetailsWS() {
+        avi.show();
         StringRequest jsonReq = new StringRequest(Request.Method.POST, ConfigWS.URL_MEMBERS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e(TAG, response.toString());
 
                 try {
-                    JSONObject jObj = new JSONObject(response.toString());
-                    String status = jObj.getString("status");
+                    JSONArray jArr = new JSONArray(response);
+                    JSONObject jObj = jArr.getJSONObject(0);
 
-                    Snackbar.make(mainLayout, status, Snackbar.LENGTH_LONG).show();
-                    if (status.toLowerCase().contains("success")) {
+                    if (jObj.toString().toLowerCase().contains("account_id")) {
+                        Snackbar.make(mainLayout, "Success!", Snackbar.LENGTH_LONG).show();
+                        spEdit.putString(getString(R.string.spUID), jObj.getString("account_id"));
                         spEdit.putString(getString(R.string.spUMobile), jObj.getString("mobilenumber"));
-                        spEdit.putString(getString(R.string.spUPass), jObj.getString("is_logged_in"));
+                        spEdit.putString(getString(R.string.spUName), jObj.getString("fullname"));
+                        spEdit.putString(getString(R.string.spUEmail), jObj.getString("emailad"));
+                        spEdit.putString(getString(R.string.spUPic), jObj.getString("profile_image"));
+                        spEdit.putString(getString(R.string.spUC), jObj.getString("uc_id"));
+                        spEdit.putString(getString(R.string.spNC), jObj.getString("nc_id"));
                         spEdit.commit();
 
                         Intent intent = new Intent(LoginActivity.this, DrawerActivity.class);
@@ -186,7 +189,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("is_logged_in", "1");
                 params.put("mobilenumber", etPhone.getText().toString());
                 return params;
             }

@@ -14,7 +14,7 @@
         android:layout_height="120dp"
         android:layout_marginTop="23dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/water" />
+        android:src="@drawable/bins" />
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -30,6 +30,7 @@
         android:layout_marginTop="105dp"
         app:cardBackgroundColor="#0f90ec">
         <ImageView
+            android:id="@+id/ivProfile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_person"
@@ -51,6 +52,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -59,6 +61,7 @@
                 android:textSize="@dimen/text_size_b" />
 
             <TextView
+                android:id="@+id/tvZone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -68,6 +71,7 @@
                 android:textSize="@dimen/text_size_b" />
 
             <TextView
+                android:id="@+id/tvUC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -77,6 +81,7 @@
                 android:textSize="@dimen/text_size_b" />
 
             <TextView
+                android:id="@+id/tvNC"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -84,7 +89,6 @@
                 android:text="Neighbourhood Council 4"
                 android:textColor="@color/clr_text_a"
                 android:textSize="@dimen/text_size_b" />
-
 
         </LinearLayout>
 

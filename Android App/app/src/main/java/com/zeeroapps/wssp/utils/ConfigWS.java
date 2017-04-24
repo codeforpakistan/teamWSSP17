@@ -12,4 +12,5 @@ public class ConfigWS {
     public static final String URL_NEW_COMP = "http://103.240.220.52/restapi/main/add_comp/add";
     public static final String URL_MY_COMPLAINTS = "http://103.240.220.52/restapi/main/add_comp/list";
     public static final String URL_MEMBERS = "http://103.240.220.52/restapi/main/members_app";
+    public static final String URL_PROFILE_PIC = "http://103.240.220.52/restapi/uploads/profile/";
 }

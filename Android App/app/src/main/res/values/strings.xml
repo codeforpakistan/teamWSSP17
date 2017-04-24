@@ -2,10 +2,15 @@
     <string name="app_name">Safa Pekhawar</string>
 
     <string name="sp">SHARED_PREF</string>
+    <string name="spUID">USER_ID</string>
+    <string name="spUName">USER_NAME</string>
+    <string name="spUEmail">USER_EMAIL</string>
     <string name="spUMobile">USER_MOBILE</string>
-    <string name="spUPass">USER_PASS</string>
-    <string name="title_activity_drawer">DrawerActivity</string>
+    <string name="spUPic">PROFILE_PIC</string>
+    <string name="spUC">UNION_COUNCIL</string>
+    <string name="spNC">NEIGHBOURHOOD_COUNCIL</string>
 
+    <string name="title_activity_drawer">DrawerActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

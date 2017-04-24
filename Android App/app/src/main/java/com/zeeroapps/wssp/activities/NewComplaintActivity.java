@@ -118,6 +118,10 @@ public class NewComplaintActivity extends Activity {
             tvTypeUrdu.setText(complaintTypeListUrdu[i]);
         }
 
+
+        tvUC.setText("Union Council "+sp.getString(getString(R.string.spUC), null));
+        tvNC.setText("Neighbourhood Council "+sp.getString(getString(R.string.spNC), null));
+
         Random random = new Random();
         complaintID = String.valueOf(10000 + random.nextInt(90000));
         Log.e(TAG, "Complaint number: "+complaintID );
@@ -268,7 +272,7 @@ public class NewComplaintActivity extends Activity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("account_id", sp.getString(getString(R.string.spUMobile), null));
+                params.put("account_id", sp.getString(getString(R.string.spUID), null));
                 params.put("c_number", complaintID);
                 params.put("c_type", complaintType);
                 params.put("c_date_time", currentDateandTime);

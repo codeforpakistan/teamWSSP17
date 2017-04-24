@@ -14,13 +14,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zeeroapps.wssp.fragments.MethodFragment;
 import com.zeeroapps.wssp.fragments.MyComplaintsFragment;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.fragments.ViewPagerFragment;
+import com.zeeroapps.wssp.utils.ConfigWS;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -31,6 +34,8 @@ public class DrawerActivity extends AppCompatActivity
     NavigationView navigationView;
     ImageButton btnMenu;
     LinearLayout btnNewComp, btnMyComps, btnCall1334, btnMethod, btnFeedback;
+    TextView tvName, tvZone, tvUC, tvNC;
+    ImageView ivProfile;
     TextView btnLogout;
     SharedPreferences sp;
     SharedPreferences.Editor spEdit;
@@ -68,6 +73,11 @@ public class DrawerActivity extends AppCompatActivity
         btnCall1334 = (LinearLayout) hv.findViewById(R.id.llCall1334);
         btnMethod = (LinearLayout) hv.findViewById(R.id.llMethod);
 //        btnFeedback = (LinearLayout) hv.findViewById(R.id.llFeedback);
+        tvName = (TextView) hv.findViewById(R.id.tvName);
+        tvZone = (TextView) hv.findViewById(R.id.tvZone);
+        tvNC = (TextView) hv.findViewById(R.id.tvNC);
+        tvUC = (TextView) hv.findViewById(R.id.tvUC);
+        ivProfile = (ImageView) hv.findViewById(R.id.ivProfile);
         btnLogout = (TextView) hv.findViewById(R.id.tvLogout);
 
         btnMenu.setOnClickListener(this);
@@ -78,7 +88,16 @@ public class DrawerActivity extends AppCompatActivity
 //        btnFeedback.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
 
+        setValues();
     }
+
+    void setValues(){
+        tvName.setText(sp.getString(getString(R.string.spUName), null));
+        tvUC.setText("Union Council "+sp.getString(getString(R.string.spUC), null));
+        tvNC.setText("Neighbourhood Council "+sp.getString(getString(R.string.spNC), null));
+        Glide.with(this).load(ConfigWS.URL_PROFILE_PIC+sp.getString(getString(R.string.spUPic), null)).into(ivProfile);
+    }
+
 
     @Override
     public void onClick(View view) {
@@ -113,7 +132,6 @@ public class DrawerActivity extends AppCompatActivity
 
     private void logoutUser() {
         spEdit.putString(getString(R.string.spUMobile), null);
-        spEdit.putString(getString(R.string.spUPass), null);
         spEdit.commit();
         startActivity(new Intent(DrawerActivity.this, LoginActivity.class));
         finish();
