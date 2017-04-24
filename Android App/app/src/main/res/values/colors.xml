@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffc200</color>
+    <color name="colorPrimaryDark">#194793</color>
+    <color name="colorAccent">#2b62be</color>
+
+    <color name="clr_wssp_primary">#fa7915</color>
+
+    <color name="clr_text_a">#FFF</color>
+    <color name="clr_wssp_blue">#2b62be</color>
+    <color name="clr_wssp_yellow">#ffc200</color>
+</resources>

@@ -1,0 +1,46 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.zeeroapps.wssp.fragments.TrashBinFragment">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="#2b62be"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="@dimen/cardview_corners">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:textSize="@dimen/view_pager_text"
+                    android:textColor="#FFF"
+                    android:text="Filled Trash Bin"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="@dimen/view_pager_text"
+                    android:textColor="#FFF"
+                    android:padding="10dp"
+                    android:text="بھرا ہوا گند کا ڈھبہ"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFF"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/trashbin"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+</FrameLayout>

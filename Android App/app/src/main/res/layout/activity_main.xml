@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.zeeroapps.wssp.activities.MainActivity">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvProfileDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#4affffff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Welcome"
+                android:textColor="@color/clr_text_a"
+                android:textSize="@dimen/text_size_a" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Ali Khan"
+                android:textColor="@color/clr_text_a"
+                android:textSize="@dimen/text_size_b" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="NC-1 | UC-32"
+                android:textColor="@color/clr_text_a"
+                android:textSize="@dimen/text_size_b" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="0123 1234567"
+                android:textColor="@color/clr_text_a"
+                android:textSize="@dimen/text_size_b" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvHowTo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/cvLogout"
+        card_view:cardBackgroundColor="#3be4e4e4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="How to submit a complaint?"
+                android:textColor="@color/clr_wssp_primary"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="شکایت جمع کرنے کا طریقہ کار"
+                android:textColor="@color/clr_wssp_primary"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvLogout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        card_view:cardBackgroundColor="#4b4b4b">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="Logout | لاگ آوٹ"
+            android:textColor="#FFF"
+            android:textSize="@dimen/text_size_b" />
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/cvProfileDetails"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_sizes_main_page"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvNewComplaint"
+                    android:layout_width="@dimen/btn_sizes_main_page"
+                    android:layout_height="@dimen/btn_sizes_main_page"
+                    android:onClick="gotoNewComplaint">
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                    android:background="#77ffffff"
+                    android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvNewCompTop"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/top_btm_tv_sizes"
+                            android:layout_alignParentTop="true"
+                            android:layout_weight="1"
+                            android:background="@color/clr_wssp_primary"
+                            android:gravity="center"
+                            android:text="New Complaint"
+                            android:textColor="#FFF"
+                            android:textSize="15dp" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/tvNewCompBtm"
+                            android:layout_below="@+id/tvNewCompTop"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/ic_new_complaint" />
+
+                        <TextView
+                            android:id="@+id/tvNewCompBtm"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/top_btm_tv_sizes"
+                            android:layout_alignParentBottom="true"
+                            android:layout_weight="1"
+                            android:background="@color/clr_wssp_primary"
+                            android:gravity="center"
+                            android:text="شکایت جمع کریں"
+                            android:textColor="#FFF"
+                            android:textSize="15dp" />
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvMyComp"
+                    android:layout_width="@dimen/btn_sizes_main_page"
+                    android:layout_height="@dimen/btn_sizes_main_page"
+                    android:onClick="gotoMyComplaints">
+
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvMyCompEng"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/top_btm_tv_sizes"
+                            android:layout_alignParentTop="true"
+                            android:layout_weight="1"
+                            android:background="@color/clr_wssp_primary"
+                            android:gravity="center"
+                            android:text="My Complaints"
+                            android:textColor="#FFF"
+                            android:textSize="15dp" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/tvMyCompUrdu"
+                            android:layout_below="@+id/tvMyCompEng"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/ic_my_complaints" />
+
+                        <TextView
+                            android:id="@+id/tvMyCompUrdu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/top_btm_tv_sizes"
+                            android:layout_alignParentBottom="true"
+                            android:layout_weight="1"
+                            android:background="@color/clr_wssp_primary"
+                            android:gravity="center"
+                            android:text="میرے شکایات"
+                            android:textColor="#FFF"
+                            android:textSize="15dp" />
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/my_margin"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvCall1334"
+                    android:layout_width="@dimen/btn_sizes_main_page"
+                    android:layout_height="@dimen/btn_sizes_main_page"
+                    android:onClick="call1334">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvCall1334Eng"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/top_btm_tv_sizes"
+                            android:layout_alignParentTop="true"
+                            android:layout_weight="1"
+                            android:background="@color/clr_wssp_primary"
+                            android:gravity="center"
+                            android:text="Call 1334"
+                            android:textColor="#FFF"
+                            android:textSize="15dp" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/tvCall1334Urdu"
+                            android:layout_below="@+id/tvCall1334Eng"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/ic_call" />
+
+                        <TextView
+                            android:id="@+id/tvCall1334Urdu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/top_btm_tv_sizes"
+                            android:layout_alignParentBottom="true"
+                            android:layout_weight="1"
+                            android:background="@color/clr_wssp_primary"
+                            android:gravity="center"
+                            android:text="1334کو کال ملایں"
+                            android:textColor="#FFF"
+                            android:textSize="15dp" />
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <stroke android:width="2dp"
+        android:color="@color/clr_wssp_yellow"/>
+    <!--<gradient-->
+        <!--android:angle="225"-->
+        <!--android:startColor="@color/clr_wssp_yellow"-->
+        <!--android:endColor="@color/clr_wssp_yellow"/>-->
+    <corners
+        android:topRightRadius="@dimen/cardview_corners"/>
+</shape>

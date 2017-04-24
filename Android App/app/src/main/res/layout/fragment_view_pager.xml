@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zeeroapps.wssp.fragments.ViewPagerFragment">
+
+    <!--<com.viewpagerindicator.TitlePageIndicator-->
+    <!--android:id="@+id/titlePagerIndicator"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="10dp"/>-->
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/pagerIndicator"
+        android:elevation="10dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="12dp">
+
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/tabStrip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/clr_wssp_blue"
+            android:layout_gravity="top" />
+
+    </android.support.v4.view.ViewPager>
+
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/pagerIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnSelect"
+        android:layout_marginBottom="10dp"
+        app:fillColor="@color/clr_wssp_yellow"
+        app:pageColor="@color/clr_wssp_blue" />
+
+    <Button
+        android:id="@+id/btnSelect"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/round_corners_btn"
+        android:text="Select | منتخب کریں"
+        android:textSize="@dimen/view_pager_text"
+        android:textAllCaps="false"
+        android:textColor="#FFF" />
+
+</RelativeLayout>

@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Safa Pekhawar</string>
+
+    <string name="sp">SHARED_PREF</string>
+    <string name="spUMobile">USER_MOBILE</string>
+    <string name="spUPass">USER_PASS</string>
+    <string name="title_activity_drawer">DrawerActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="call_center">1334 کو کال ملایں | Call 1334</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="str_safa_pekhawar_eng">
+        Safa Pekhawar
+        \nPeshawar produces around 700 tons of municiple waste every day which is increasing day by day
+        with the rate of 3KG/day. Around 50% of the municiple waste remains on the place where it is produced.
+        It makes the surrounding air hazardious for living.
+        \n
+        \nSafa Pekhawar is a community engagement app through which people complaint about the water &amp;
+        sanitation related issues in their neighbourhood.
+        \n
+        \nThrough this app people take picture of the garbage, damaged water drainage system or any other
+        issue related to water &amp; sanitation in Peshawar and send it to WSSP Complaint Cell.
+        \n
+        \nAfter receiving the complaint, WSSP admin team notifies the cleaning team about the location of issue.
+        WSSP Cleaning team reaches the destination and resolves the issue.
+
+    </string>
+    <string name="str_safa_pekhawar_urdu">
+        صفا پیبنور
+        \n
+پشاور تقریبا 700 ٹن میونسپل گندگی روزانہ پیدا کرتا ہے جسمے 3 کلو گندگی کا اضافہ روزانہ کےحساب سے ہورہا ہے. تقریبا 50% گندگی اسی جگاپڑھی رہتی ہے جہاں پیدا  ہوتی  ہے جو کہ اپنے ارد گرد ماحول کوجینے کے لئے  خطرناک بنادیتی ہے
+        \n\n
+        صفا پیبنور ہمارے معاشرے کے لوگوں کے اینگیجمنٹ کے لئے بنایا گیاایسا ایپلیکیشن ہے جس کے ذریعے لوگ  پانی اور صفائی سے متعلقہ اپنے
+پڑوس کے مسائل کے بارے میں شکایت جمع کر سکتے ہیں
+        \n\n
+        اس ایپلیکیشن کے ذریعے لوگ کوڑا کرکٹ، گندگی،بند نالی اور صفائی سے متعلقہ مسائل کے بارے میں
+        ڈبلیو ایس ایس پی کمپلینٹ سیل کے پاس آسانی سے شکایت جمع کر سکتے ہیں
+        \n\n
+شکایت موصولہونے کے بعد ڈبلیو ایس ایس پی کمپلینٹ  سیل ٹیم صفائی کےعملے کو مطلع کرتی ہے جو کہ مسلہ کی جگا پہنچ کر مسلہ حل کرتی ہے.
+
+    </string>
+
+    <string name="how_to_urdu">
+        سٹیپ 1
+        \n
+ایپلیکیشن کھولیں
+\n\n
+سٹیپ 2
+        \n
+مختلف شکایات کے اقسام کے لئے انگلیوں کو دائیں اور بائیں سکرول کریں
+\n\n
+سٹیپ 3
+        \n
+اپنے مطلوبہ شکایت کی قسم کو منتخب کریں
+\n\n
+سٹیپ 4
+        \n
+متعلقہ مسلے کی تصویر لیں
+\n\n
+سٹیپ 5
+        \n
+متعلقہ مسلہ جس گلی میں ہے اس کا پتا لکھنے کے لیے  “گلی کا پتا لکھیں” بٹن دبائیں
+\n\n
+سٹیپ 6
+        \n
+ شکایت درج کرنے کے لئے  “ درج کریں ” دبائیں. آپ کی شکایت جمع ہو جائیگی
+آپ شکایت کے  بارے  میں  جاننے  کے لئے  مینو  میں  جائیں  اور  “ میرے شکایات” کا بٹن دبائیں
+آپ 1334 کودراکٹ کالکر کہ بھی شکایت  کے بارے میں  جان  سکتے ہیں
+
+
+    </string>
+
+
+    <string name="how_to_eng">Step 1:
+        \nOpen the application and Sign In.
+        \n
+        \nStep 2:
+        \nScroll between the complaint types by swiping fingers left and right.
+        \n
+        \n
+        Step 3:
+        \nSelect the complaint type you wish to move with.
+        \n
+        \nStep 4:
+        \nTake picture of the related issue/problem you are facing.
+        \n
+        \nStep 5:
+        \nClick “Add Street Address” button. In the next screen, type the street address in which the
+        issue/problem presists.
+        \n
+        \nStep 6:
+        \nClick “Submit” and your complaitn will be
+        submitted and you will be provided a complaint number. You can check status of your
+        complaint in the “My Complaints” option in the
+        sliding bar. You can also check status of your
+        complaint through a direct call to 1334 by
+        providing the complaint number you are given.
+    </string>
+
+    <string name="thank_you_eng">Thank you\n
+        Your complaint has been submitted.\n
+        #C_NO# is your complaint number.
+    </string>
+    <string name="thank_you_urdu">
+        شکریہ\n
+        آپ کی شکایت درج کی جاچکی ہے\n
+        #C_NO# آپ کا شکایت نمبر ہے
+    </string>
+</resources>
