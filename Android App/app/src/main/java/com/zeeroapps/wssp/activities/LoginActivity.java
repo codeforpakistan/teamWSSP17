@@ -1,15 +1,24 @@
 package com.zeeroapps.wssp.activities;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -18,8 +27,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zeeroapps.wssp.R;
+import com.zeeroapps.wssp.receivers.ConnectivityStateReceiver;
 import com.zeeroapps.wssp.utils.AppController;
-import com.zeeroapps.wssp.utils.ConfigWS;
+import com.zeeroapps.wssp.utils.Constants;
 import com.zeeroapps.wssp.utils.SHA1;
 
 import org.json.JSONArray;
@@ -69,6 +79,20 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         btnHelp.setOnClickListener(this);
     }
 
+    public void validateFields(){
+        if (TextUtils.isEmpty(etPhone.getText())){
+            etPhone.requestFocus();
+            etPhone.setError("Enter valid phone number!");
+            return;
+        }else if (etPass.getText().toString().length() < 5){
+            etPass.requestFocus();
+            etPass.setError("Password must be 5 characters long!");
+            return;
+        }
+        avi.show();
+        loginWS();
+    }
+
     @Override
     public void onClick(View view) {
         int vID = view.getId();
@@ -78,8 +102,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 //                Intent intent = new Intent(LoginActivity.this, DrawerActivity.class);
 //                startActivity(intent);
 //                finish();
-                avi.show();
-                loginWS();
+                validateFields();
                 break;
             case R.id.btnHelp:
                 Intent intent = new Intent(LoginActivity.this, HelpActivity.class);
@@ -98,7 +121,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             e.printStackTrace();
         }
 
-        StringRequest jsonReq = new StringRequest(Request.Method.POST, ConfigWS.URL_LOGIN, new Response.Listener<String>() {
+        StringRequest jsonReq = new StringRequest(Request.Method.POST, Constants.URL_LOGIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e(TAG, response.toString());
@@ -107,7 +130,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     JSONObject jObj = new JSONObject(response.toString());
                     String status = jObj.getString("status");
 
-//                    Snackbar.make(mainLayout, status, Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(mainLayout, status, Snackbar.LENGTH_LONG).show();
                     if (status.toLowerCase().contains("success")) {
                         getMemberDetailsWS();
 
@@ -127,7 +150,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 if (error.toString().contains("NoConnectionError")) {
                     Snackbar.make(mainLayout, "Error in connection!", Snackbar.LENGTH_LONG).show();
                 } else {
-                    Snackbar.make(mainLayout, "Webservice not responding!", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(mainLayout, "Server not responding!", Snackbar.LENGTH_LONG).show();
                 }
                 avi.hide();
             }
@@ -145,7 +168,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     public void getMemberDetailsWS() {
         avi.show();
-        StringRequest jsonReq = new StringRequest(Request.Method.POST, ConfigWS.URL_MEMBERS, new Response.Listener<String>() {
+        StringRequest jsonReq = new StringRequest(Request.Method.POST, Constants.URL_MEMBERS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e(TAG, response.toString());
@@ -181,7 +204,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 if (error.toString().contains("NoConnectionError")) {
                     Snackbar.make(mainLayout, "Error in connection!", Snackbar.LENGTH_LONG).show();
                 } else {
-                    Snackbar.make(mainLayout, "Webservice not responding!", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(mainLayout, "Server not responding!", Snackbar.LENGTH_LONG).show();
                 }
                 avi.hide();
             }

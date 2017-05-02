@@ -13,20 +13,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zeeroapps.wssp.Model.ModelComplaints;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.adapter.CustomAdapterComplaints;
 import com.zeeroapps.wssp.utils.AppController;
-import com.zeeroapps.wssp.utils.ConfigWS;
+import com.zeeroapps.wssp.utils.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -88,7 +86,7 @@ public class MyComplaintsFragment extends Fragment {
         avi.show();
 
 
-        StringRequest jsonReq = new StringRequest(Request.Method.POST, ConfigWS.URL_MY_COMPLAINTS, new Response.Listener<String>() {
+        StringRequest jsonReq = new StringRequest(Request.Method.POST, Constants.URL_MY_COMPLAINTS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e(TAG, "Response: "+response );
@@ -125,7 +123,7 @@ public class MyComplaintsFragment extends Fragment {
                 if (error.toString().contains("NoConnectionError")) {
                     Snackbar.make(layoutMain, "Error in connection!", Snackbar.LENGTH_LONG).setActionTextColor(Color.RED).show();
                 } else {
-                    Snackbar.make(layoutMain, "Webservice not responding!", Snackbar.LENGTH_LONG).setActionTextColor(Color.RED).show();
+                    Snackbar.make(layoutMain, "Server not responding!", Snackbar.LENGTH_LONG).setActionTextColor(Color.RED).show();
                 }
                 avi.hide();
             }
@@ -138,70 +136,6 @@ public class MyComplaintsFragment extends Fragment {
                 return params;
             }
         };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, ConfigWS.URL_MY_COMPLAINTS, null, new Response.Listener<JSONArray>() {
-//            @Override
-//            public void onResponse(JSONArray response) {
-//                Log.e(TAG, "Array Response: "+response );
-//                ModelComplaints complaint;
-//                try {
-//                    for (int i=0; i<response.length(); i++ ) {
-//                        JSONObject jObj = response.getJSONObject(i);
-//                        Log.e(TAG, "Object In Array Response: " + jObj);
-//                        complaint = new ModelComplaints();
-//                        complaint.setcImageUrl(jObj.getString("image_path"));
-//                        complaint.setcNumber(jObj.getString("c_number"));
-//                        complaint.setcStatus(jObj.getString("status"));
-//                        complaint.setcDateAndTime(jObj.getString("c_date_time"));
-//                        complaint.setcDetail(jObj.getString("c_details"));
-//                        complaint.setcType(jObj.getString("c_type"));
-//                        complaint.setcAddress(jObj.getString("bin_address"));
-//                        compList.add(complaint);
-//                    }
-//
-//                    customAdapter.notifyDataSetChanged();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    Log.e(TAG, e.toString());
-//                }
-//
-//                avi.hide();
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Log.e(TAG, "onErrorResponse: "+error );
-//                if (error.toString().contains("NoConnectionError")) {
-//                    Snackbar.make(layoutMain, "Error in connection!", Snackbar.LENGTH_LONG).setActionTextColor(Color.RED).show();
-//                } else {
-//                    Snackbar.make(layoutMain, "Webservice not responding!", Snackbar.LENGTH_LONG).setActionTextColor(Color.RED).show();
-//                }
-//                avi.hide();
-//            }
-//        }){
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("mobilenumber", sp.getString(getString(R.string.spUMobile), null));
-//                return params;
-//            }
-//        };
 
         AppController.getInstance().addToRequestQueue(jsonReq, JSON_TAG);
     }

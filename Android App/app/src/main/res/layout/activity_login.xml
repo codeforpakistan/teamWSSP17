@@ -49,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone Number  |  فون نمبر"
+                android:maxLength="14"
                 android:imeOptions="actionNext"
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
@@ -64,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Password  |  پاس ورڈ"
                 android:imeOptions="actionDone"
+                android:maxLength="20"
                 android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 

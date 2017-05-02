@@ -98,15 +98,16 @@ public class MyLocation extends Service implements LocationListener {
                     }
                 }
 
-                if (netLoc.getAccuracy() > gpsLoc.getAccuracy()) {
-                    location = netLoc;
-                } else {
-                    location = gpsLoc;
+                if (netLoc != null && gpsLoc != null) {
+                    if (netLoc.getAccuracy() > gpsLoc.getAccuracy()) {
+                        location = netLoc;
+                    } else {
+                        location = gpsLoc;
+                    }
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+
                 }
-                Log.e(TAG, "NET ACC: " + netLoc.getAccuracy());
-                Log.e(TAG, "GPS ACC: " + gpsLoc.getAccuracy());
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
 
             }
         } catch (Exception e) {

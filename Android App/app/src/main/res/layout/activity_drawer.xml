@@ -22,11 +22,12 @@
 
             <ImageButton
                 android:id="@+id/btnMenu"
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:background="?android:selectableItemBackground"
                 android:src="@drawable/ic_menu"
-                android:scaleType="fitCenter"
+                android:padding="5dp"
+                android:scaleType="fitXY"
                 android:layout_marginLeft="10dp"
                 android:tint="@color/clr_wssp_blue" />
 
@@ -36,6 +37,7 @@
                 android:gravity="center"
                 android:text="Safa Pekhawar"
                 android:textStyle="bold"
+                android:layout_marginRight="40dp"
                 android:textColor="@color/clr_wssp_blue"
                 android:textSize="18dp" />
         </LinearLayout>

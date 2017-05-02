@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.zeeroapps.wssp.services.NetworkService;
 
@@ -18,7 +19,8 @@ public class ConnectivityStateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.e(TAG, "BROADCAST RECEIVER" );
+        Log.e(TAG, "BROADCAST RECEIVER RUNNING" );
+        Toast.makeText(context, "BROADCAST RECEIVER RUNNING", Toast.LENGTH_SHORT).show();
         Intent serviceIntent = new Intent(context, NetworkService.class);
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

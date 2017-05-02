@@ -1,9 +1,12 @@
 package com.zeeroapps.wssp.activities;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
@@ -13,6 +16,9 @@ import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.FileProvider;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -35,7 +42,8 @@ import com.zeeroapps.wssp.SQLite.DatabaseHelper;
 import com.zeeroapps.wssp.receivers.ConnectivityStateReceiver;
 import com.zeeroapps.wssp.services.MyLocation;
 import com.zeeroapps.wssp.utils.AppController;
-import com.zeeroapps.wssp.utils.ConfigWS;
+import com.zeeroapps.wssp.utils.CheckNetwork;
+import com.zeeroapps.wssp.utils.Constants;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -72,6 +80,7 @@ public class NewComplaintActivity extends Activity {
     String complaintTypeListUrdu[] = {"نکاسی آب", "بھرا ہوا گند کا ڈھبہ", "پانی کا مسئلہ", "کوڑا کرکٹ", "کوئی اور مسئلہ"};
 
     SharedPreferences sp;
+    Boolean camFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +90,13 @@ public class NewComplaintActivity extends Activity {
         sp = this.getSharedPreferences(getString(R.string.sp), MODE_PRIVATE);
 
         initUIComponents();
-        openCamera();
+        if (!camFlag) {
+            openCamera();
+            camFlag = true;
+            Log.e(TAG, "onCreate: flag is on");
+        }
         getTypeIDandTime();
-
+        Log.e(TAG, "onCreate: " );
     }
 
     void initUIComponents(){
@@ -118,13 +131,12 @@ public class NewComplaintActivity extends Activity {
             tvTypeUrdu.setText(complaintTypeListUrdu[i]);
         }
 
-
         tvUC.setText("Union Council "+sp.getString(getString(R.string.spUC), null));
         tvNC.setText("Neighbourhood Council "+sp.getString(getString(R.string.spNC), null));
 
-        Random random = new Random();
-        complaintID = String.valueOf(10000 + random.nextInt(90000));
-        Log.e(TAG, "Complaint number: "+complaintID );
+        Long time = System.currentTimeMillis()/1000;
+        complaintID = Long.toString(time, 30).toUpperCase();
+        Log.e(TAG, "Complaint Number: "+complaintID );
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
@@ -230,21 +242,32 @@ public class NewComplaintActivity extends Activity {
         }
     }
 
-    public void submitData(View v){
+    public void validateFields(){
+        if (TextUtils.isEmpty(etAddress.getText())){
+            etAddress.requestFocus();
+            etAddress.setError("Enter valid Address!");
+            return;
+        }
 
-        sendDataToDB();
-//        if (CheckNetwork.isOnline(this)){
-//            Log.e(TAG, "Interent Available - Data submitted");
-//        }else {
-//            Log.e(TAG, "No Interent Available - Data saved to SQLite");
-//            storeDataInSQLite();
-//            registerBroadcast();
-//        }
+        btnSubmit.setEnabled(false);
+        if (CheckNetwork.isOnline(this)){
+            Log.e(TAG, "Interent Available - Data submitted");
+            sendDataToDB();
+        }else {
+            Log.e(TAG, "No Interent Available - Data saved to SQLite");
+            storeDataInSQLite();
+            registerBroadcast();
+        }
+    }
+
+    public void submitData(View v){
+        validateFields();
     }
 
     public void sendDataToDB(){
         avi.show();
-        StringRequest jsonReq = new StringRequest(Request.Method.POST, ConfigWS.URL_NEW_COMP, new Response.Listener<String>() {
+        StringRequest jsonReq = new StringRequest(Request.Method.POST, Constants.URL_NEW_COMP,
+                new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e(TAG, response.toString());
@@ -265,7 +288,7 @@ public class NewComplaintActivity extends Activity {
                 if (error.toString().contains("NoConnectionError")) {
                     Snackbar.make(llMain, "Internet Not Available!", Snackbar.LENGTH_LONG).show();
                 } else {
-                    Snackbar.make(llMain, "Webservice not responding!", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(llMain, "Server not responding!", Snackbar.LENGTH_LONG).show();
                 }
             }
         }) {
@@ -278,24 +301,55 @@ public class NewComplaintActivity extends Activity {
                 params.put("c_date_time", currentDateandTime);
                 params.put("c_details", etDetails.getText().toString());
                 params.put("image_path", encodeImage());
-                params.put("longitude", lng.toString());
                 params.put("latitude", lat.toString());
+                params.put("longitude", lng.toString());
                 params.put("bin_address", etAddress.getText().toString());
                 params.put("status", "pendingreview");
                 return params;
             }
         };
-        jsonReq.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        jsonReq.setRetryPolicy(new DefaultRetryPolicy(0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         AppController.getInstance().addToRequestQueue(jsonReq, tag_json_obj);
     }
 
-    public void registerBroadcast(){
-        IntentFilter filterNetwork = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        ConnectivityStateReceiver csr = new ConnectivityStateReceiver();
-        registerReceiver(csr, filterNetwork);
-    }
     public void storeDataInSQLite(){
         DatabaseHelper dbHelper = new DatabaseHelper(this);
-        dbHelper.addComplaintToDB(1, etAddress.getText().toString());
+        Boolean dataStored = dbHelper.addComplaintToDB(
+                sp.getString(getString(R.string.spUID), null),
+                complaintID,
+                complaintType,
+                currentDateandTime,
+                encodeImage(),
+                lat.toString(),
+                lng.toString(),
+                etAddress.getText().toString(),
+                etDetails.getText().toString(),
+                "pendingreview"
+        );
+        if (dataStored){
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Internet Not available!")
+                    .setMessage("Complaint temporarily stored in mobile database. Connect your phone to internet as soon as possible.")
+                    .setCancelable(false)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(NewComplaintActivity.this, DrawerActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }).show();
+        }
     }
+
+    private void registerBroadcast() {
+        PackageManager pm = getPackageManager();
+        ComponentName cn = new ComponentName(NewComplaintActivity.this, ConnectivityStateReceiver.class);
+        pm.setComponentEnabledSetting(cn, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+        Toast.makeText(this, "Enabled!", Toast.LENGTH_SHORT).show();
+
+    }
+
 }

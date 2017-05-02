@@ -129,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="left"
                     android:hint="Type Address | پتا درج کریں"
+                    android:maxLength="500"
                     android:lines="2" />
 
             </android.support.design.widget.TextInputLayout>
@@ -142,6 +143,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left"
+                    android:maxLength="3000"
                     android:hint="Type Complaint Details |  شکایت کی تفصیلات درج کریں"
                     android:lines="4" />
             </android.support.design.widget.TextInputLayout>

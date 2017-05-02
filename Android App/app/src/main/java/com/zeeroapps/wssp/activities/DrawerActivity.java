@@ -19,11 +19,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.zeeroapps.wssp.fragments.MethodFragment;
 import com.zeeroapps.wssp.fragments.MyComplaintsFragment;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.fragments.ViewPagerFragment;
-import com.zeeroapps.wssp.utils.ConfigWS;
+import com.zeeroapps.wssp.utils.Constants;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -95,9 +96,13 @@ public class DrawerActivity extends AppCompatActivity
         tvName.setText(sp.getString(getString(R.string.spUName), null));
         tvUC.setText("Union Council "+sp.getString(getString(R.string.spUC), null));
         tvNC.setText("Neighbourhood Council "+sp.getString(getString(R.string.spNC), null));
-        Glide.with(this).load(ConfigWS.URL_PROFILE_PIC+sp.getString(getString(R.string.spUPic), null)).into(ivProfile);
+        Glide.with(this).load(Constants.URL_PROFILE_PIC+sp.getString(getString(R.string.spUPic), null)).placeholder(R.drawable.ic_person).into(ivProfile);
+//        Picasso.with(this)
+//                .load(Constants.URL_PROFILE_PIC+sp.getString(getString(R.string.spUPic), null))
+//                .placeholder(R.drawable.ic_person)
+//                .resize(300, 300)
+//                .into(ivProfile);
     }
-
 
     @Override
     public void onClick(View view) {

@@ -1,7 +1,6 @@
 package com.zeeroapps.wssp.activities;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -11,7 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.utils.AppController;
-import com.zeeroapps.wssp.utils.ConfigWS;
+import com.zeeroapps.wssp.utils.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +37,7 @@ public class MyComplaintsActivity extends Activity {
     }
 
     public void getDataFromDB(){
-        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(ConfigWS.URL_MY_COMPLAINTS, new Response.Listener<JSONArray>() {
+        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Constants.URL_MY_COMPLAINTS, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.e(TAG, "Array Response: "+response );

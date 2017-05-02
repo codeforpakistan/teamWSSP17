@@ -108,8 +108,8 @@ public class CustomAdapterComplaints extends RecyclerView.Adapter<CustomAdapterC
         public static void bindData(ModelComplaints mc) {
             Log.e(TAG, "bindData: "+mc.getcImageUrl());
             imageComplaint.setImageUrl(mc.getcImageUrl(), imageLoader);
-//            Picasso.with(mContext).load(ConfigWS.HOST_URL+mc.getcImageUrl()).resize(100, 100).into(imageComplaint);
-//            Glide.with(mContext).load(ConfigWS.HOST_URL+mc.getcImageUrl()).override(300, 300)
+//            Picasso.with(mContext).load(Constants.HOST_URL+mc.getcImageUrl()).resize(100, 100).into(imageComplaint);
+//            Glide.with(mContext).load(Constants.HOST_URL+mc.getcImageUrl()).override(300, 300)
 //                    .listener(new RequestListener<String, GlideDrawable>() {
 //                        @Override
 //                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {

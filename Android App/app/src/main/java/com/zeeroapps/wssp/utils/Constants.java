@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 /**
  * Created by Zeero on 10/27/2016.
  */
-public class ConfigWS {
+public class Constants {
 
     public static final String HOST_URL = "http://103.240.220.52/restapi/";
     public static final String URL_LOGIN = "http://103.240.220.52/restapi/index.php/main/login_validations";

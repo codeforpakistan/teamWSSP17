@@ -1,6 +1,6 @@
 package com.zeeroapps.wssp.Model;
 
-import com.zeeroapps.wssp.utils.ConfigWS;
+import com.zeeroapps.wssp.utils.Constants;
 
 /**
  * Created by fazalullah on 4/17/17.
@@ -24,7 +24,7 @@ public class ModelComplaints {
     }
 
     public void setcImageUrl(String cImageUrl) {
-        this.cImageUrl = ConfigWS.HOST_URL+cImageUrl;
+        this.cImageUrl = Constants.HOST_URL+cImageUrl;
     }
 
     public void setcDateAndTime(String cDateAndTime) {
