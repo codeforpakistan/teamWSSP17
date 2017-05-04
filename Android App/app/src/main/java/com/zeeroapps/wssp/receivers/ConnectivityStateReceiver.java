@@ -20,7 +20,6 @@ public class ConnectivityStateReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         Log.e(TAG, "BROADCAST RECEIVER RUNNING" );
-        Toast.makeText(context, "BROADCAST RECEIVER RUNNING", Toast.LENGTH_SHORT).show();
         Intent serviceIntent = new Intent(context, NetworkService.class);
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

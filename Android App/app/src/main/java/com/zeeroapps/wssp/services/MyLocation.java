@@ -17,7 +17,6 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -81,7 +80,6 @@ public class MyLocation extends Service implements LocationListener {
                         netLoc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         if (netLoc != null) {
                             location = netLoc;
-                            Toast.makeText(mContext, "NETWORK LOCATION: "+location.getAccuracy(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -93,7 +91,6 @@ public class MyLocation extends Service implements LocationListener {
                         gpsLoc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                         if (gpsLoc != null) {
                             location = gpsLoc;
-                            Toast.makeText(mContext, "GPSSSSS LOCATION: "+location.getAccuracy(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

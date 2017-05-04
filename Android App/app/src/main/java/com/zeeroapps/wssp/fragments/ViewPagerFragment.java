@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -21,7 +22,9 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -52,6 +55,7 @@ public class ViewPagerFragment extends Fragment {
 
     private String TAG = "MyApp";
     private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 1;
+    private GestureDetector tapGestureDetector;
 
     public ViewPagerFragment() {
         // Required empty public constructor
@@ -73,20 +77,38 @@ public class ViewPagerFragment extends Fragment {
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkAndRequestPermissions()) {
-                    MyLocation myLocation = new MyLocation(mContext);
-                    if (myLocation.canGetLocation()) {
-                        Intent intent = new Intent(mContext, NewComplaintActivity.class);
-                        intent.putExtra("selected_item", viewPager.getCurrentItem());
-                        startActivity(intent);
-                    } else {
-                        myLocation.showSettingsAlert();
-                    }
-                }
-
+                selectPage();
             }
         });
+        tapGestureDetector = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener(){
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                Log.e(TAG, "onSingleTapConfirmed: "+viewPager.getCurrentItem() );
+                selectPage();
+                return super.onSingleTapConfirmed(e);
+            }
+        });
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                tapGestureDetector.onTouchEvent(event);
+                return false;
+            }
+        });
+
         return view;
+    }
+
+    private void selectPage(){
+        if (checkAndRequestPermissions()) {
+            MyLocation myLocation = new MyLocation(mContext);
+            if (myLocation.canGetLocation()) {
+                Intent intent = new Intent(mContext, NewComplaintActivity.class);
+                intent.putExtra("selected_item", viewPager.getCurrentItem());
+                startActivity(intent);
+            } else {
+                myLocation.showSettingsAlert();
+            }
+        }
     }
 
     public static ViewPagerFragment newInstance() {

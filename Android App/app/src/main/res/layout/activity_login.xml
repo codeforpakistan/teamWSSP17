@@ -51,7 +51,7 @@
                 android:hint="Phone Number  |  فون نمبر"
                 android:maxLength="14"
                 android:imeOptions="actionNext"
-                android:inputType="text" />
+                android:inputType="phone" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout

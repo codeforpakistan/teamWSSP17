@@ -290,6 +290,7 @@ public class NewComplaintActivity extends Activity {
                 } else {
                     Snackbar.make(llMain, "Server not responding!", Snackbar.LENGTH_LONG).show();
                 }
+                btnSubmit.setEnabled(true);
             }
         }) {
             @Override
@@ -348,8 +349,7 @@ public class NewComplaintActivity extends Activity {
         PackageManager pm = getPackageManager();
         ComponentName cn = new ComponentName(NewComplaintActivity.this, ConnectivityStateReceiver.class);
         pm.setComponentEnabledSetting(cn, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
-        Toast.makeText(this, "Enabled!", Toast.LENGTH_SHORT).show();
-
+        Log.e(TAG, "Broadcast: ENABLED!" );
     }
 
 }

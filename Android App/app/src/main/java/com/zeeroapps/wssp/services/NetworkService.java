@@ -156,7 +156,7 @@ public class NetworkService extends Service {
         ComponentName componentName = new ComponentName(NetworkService.this, ConnectivityStateReceiver.class);
         pm.setComponentEnabledSetting(componentName,PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
-        Toast.makeText(getApplicationContext(), "Disabled!", Toast.LENGTH_LONG).show();
+        Log.e(TAG, "Broadcast: DISABLED!" );
     }
 
     @Nullable
