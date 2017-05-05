@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "855944151186",
+    "project_id": "wssp-94e79"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855944151186:android:4782cc4a79ea7320",
+        "android_client_info": {
+          "package_name": "com.zeeroapps.wssp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGDsFBoOsUJ0IelFvDtETJkwdFUJiIUgo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-98514180-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -25,6 +25,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.receivers.ConnectivityStateReceiver;
@@ -55,6 +57,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     String passwordSHA1;
 
+    Tracker mTracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +68,18 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         spEdit = sp.edit();
 
         initUIControls();
+
+        AppController appController = (AppController) getApplication();
+        mTracker = appController.getDefaultTracker();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String scrName = "LOGIN SCREEN";
+        Log.e(TAG, "onResume: "+scrName);
+        mTracker.setScreenName(scrName);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     private void initUIControls() {

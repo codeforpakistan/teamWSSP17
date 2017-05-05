@@ -16,13 +16,16 @@ import android.view.animation.TranslateAnimation;
 import android.webkit.WebView;
 import android.widget.ImageView;
 
-import com.felipecsl.gifimageview.library.GifImageView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.zeeroapps.wssp.R;
+import com.zeeroapps.wssp.utils.AppController;
 
 public class SplashActivity extends Activity {
 
     SharedPreferences sp;
     ImageView ivSplash;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,9 @@ public class SplashActivity extends Activity {
                 finish();
             }
         }, 3000);
+
+        AppController appController = (AppController) getApplication();
+        mTracker = appController.getDefaultTracker();
     }
 
     public void translateAnimation(){
@@ -106,5 +112,14 @@ public class SplashActivity extends Activity {
                 Log.e("Animm...", "Endd....");
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String name = "SPLASH SCREEN";
+        Log.i("MyApp", "Setting screen name: " + name);
+        mTracker.setScreenName("Image~" + name);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

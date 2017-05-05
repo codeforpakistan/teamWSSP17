@@ -5,16 +5,23 @@ import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.zeeroapps.wssp.R;
+import com.zeeroapps.wssp.utils.AppController;
 
 public class HelpActivity extends Activity {
 
     Button btnEng, btnUrdu;
     TextView tvAbout;
+
+    Tracker mTracker;
+    String TAG = "MyApp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +54,16 @@ public class HelpActivity extends Activity {
                 btnUrdu.setTextColor(Color.WHITE);
             }
         });
+        AppController appController = (AppController) getApplication();
+        mTracker = appController.getDefaultTracker();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String scrName = "LOGIN SCREEN";
+        Log.e(TAG, "onResume: "+scrName);
+        mTracker.setScreenName(scrName);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 }

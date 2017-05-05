@@ -36,6 +36,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.SQLite.DatabaseHelper;
@@ -82,6 +84,8 @@ public class NewComplaintActivity extends Activity {
     SharedPreferences sp;
     Boolean camFlag = false;
 
+    Tracker mTracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +101,18 @@ public class NewComplaintActivity extends Activity {
         }
         getTypeIDandTime();
         Log.e(TAG, "onCreate: " );
+
+        AppController appController = (AppController) getApplication();
+        mTracker = appController.getDefaultTracker();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String scrName = "LOGIN SCREEN";
+        Log.e(TAG, "onResume: "+scrName);
+        mTracker.setScreenName(scrName);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     void initUIComponents(){

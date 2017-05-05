@@ -132,7 +132,7 @@ public class NetworkService extends Service {
         String notificationMessage = "Your complaint has been submitted. "+cNo+" is your complaint number.";
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         NotificationCompat.Builder nBuilder = new NotificationCompat.Builder(this);
-        nBuilder.setSmallIcon(R.mipmap.ic_launcher)
+        nBuilder.setSmallIcon(R.drawable.ic_stat_notification)
                 .setAutoCancel(true)
                 .setContentTitle("Complaint sent!")
                 .setContentText(notificationMessage)

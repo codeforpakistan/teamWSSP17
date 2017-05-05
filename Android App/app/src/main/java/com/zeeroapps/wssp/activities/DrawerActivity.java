@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,11 +20,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.Picasso;
 import com.zeeroapps.wssp.fragments.MethodFragment;
 import com.zeeroapps.wssp.fragments.MyComplaintsFragment;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.fragments.ViewPagerFragment;
+import com.zeeroapps.wssp.utils.AppController;
 import com.zeeroapps.wssp.utils.Constants;
 
 public class DrawerActivity extends AppCompatActivity
@@ -40,6 +44,8 @@ public class DrawerActivity extends AppCompatActivity
     TextView btnLogout;
     SharedPreferences sp;
     SharedPreferences.Editor spEdit;
+    private Tracker mTracker;
+    private String TAG = "MyApp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +67,17 @@ public class DrawerActivity extends AppCompatActivity
         }
         initUIComponents();
 
+        AppController appController = (AppController) getApplication();
+        mTracker = appController.getDefaultTracker();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String scrName = "LOGIN SCREEN";
+        Log.e(TAG, "onResume: "+scrName);
+        mTracker.setScreenName(scrName);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     void initUIComponents(){

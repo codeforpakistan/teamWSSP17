@@ -7,6 +7,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 
 /**
  * Created by fazal on 11/19/2016.
@@ -21,6 +23,19 @@ public class AppController extends Application {
     private ImageLoader mImageLoader;
 
     private static AppController mInstance;
+
+    public Tracker mTracker;
+
+    synchronized public Tracker getDefaultTracker(){
+        if (mTracker == null){
+            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+            mTracker = analytics.newTracker("UA-98514180-1");
+            mTracker.enableExceptionReporting(true);
+            mTracker.enableAdvertisingIdCollection(true);
+            mTracker.enableAutoActivityTracking(true);
+        }
+        return mTracker;
+    }
 
     @Override
     public void onCreate() {
