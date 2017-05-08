@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.utils.AppController;
 
@@ -26,6 +27,7 @@ public class SplashActivity extends Activity {
     SharedPreferences sp;
     ImageView ivSplash;
     private Tracker mTracker;
+    FirebaseAnalytics analytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,8 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
 
         sp = getSharedPreferences(getString(R.string.sp), MODE_PRIVATE);
+
+        analytics = FirebaseAnalytics.getInstance(this);
 
         ivSplash = (ImageView) findViewById(R.id.ivSplash);
         scaleAnimation();
@@ -121,5 +125,11 @@ public class SplashActivity extends Activity {
         Log.i("MyApp", "Setting screen name: " + name);
         mTracker.setScreenName("Image~" + name);
         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "IMAGE");
+        analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 }

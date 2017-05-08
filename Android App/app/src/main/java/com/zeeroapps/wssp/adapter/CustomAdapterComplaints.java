@@ -58,14 +58,14 @@ public class CustomAdapterComplaints extends RecyclerView.Adapter<CustomAdapterC
     public static class ViewHolder extends RecyclerView.ViewHolder {
         static String TAG = "MyApp";
         public static Context mContext;
-        static ArrayList<ModelComplaints> myComplaintsList;
-        private static NetworkImageView imageComplaint;
-        private static TextView tvComplaintNumber;
-        private static TextView tvComplaintStatus;
-        private static TextView tvComplaintStatusUrdu;
-        private static TextView tvDateAndTime;
-        private static AVLoadingIndicatorView avi;
-        private static ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+        public ArrayList<ModelComplaints> myComplaintsList;
+        private NetworkImageView imageComplaint;
+        private TextView tvComplaintNumber;
+        private TextView tvComplaintStatus;
+        private TextView tvComplaintStatusUrdu;
+        private TextView tvDateAndTime;
+        private AVLoadingIndicatorView avi;
+        private ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
         private static String statusListUrdu[] = {"زیر جائزہ", "کام جاری ہے", "مکمّل شدہ"};
 
@@ -105,7 +105,7 @@ public class CustomAdapterComplaints extends RecyclerView.Adapter<CustomAdapterC
             });
         }
 
-        public static void bindData(ModelComplaints mc) {
+        public void bindData(ModelComplaints mc) {
             Log.e(TAG, "bindData: "+mc.getcImageUrl());
             imageComplaint.setImageUrl(mc.getcImageUrl(), imageLoader);
 //            Picasso.with(mContext).load(Constants.HOST_URL+mc.getcImageUrl()).resize(100, 100).into(imageComplaint);

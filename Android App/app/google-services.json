@@ -1,35 +1,39 @@
 {
   "project_info": {
-    "project_number": "855944151186",
-    "project_id": "wssp-94e79"
+    "project_number": "804447194573",
+    "firebase_url": "https://wssp-7921c.firebaseio.com",
+    "project_id": "wssp-7921c",
+    "storage_bucket": "wssp-7921c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:855944151186:android:4782cc4a79ea7320",
+        "mobilesdk_app_id": "1:804447194573:android:4782cc4a79ea7320",
         "android_client_info": {
           "package_name": "com.zeeroapps.wssp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "804447194573-d8h2qmnv7bjuul81oibgu33ptqdn993j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCGDsFBoOsUJ0IelFvDtETJkwdFUJiIUgo"
+          "current_key": "AIzaSyBG41hRReXFs0iaMTWTccsiOkoi3ziNOSs"
         }
       ],
       "services": {
         "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-98514180-1"
-          }
+          "status": 1
         },
         "appinvite_service": {
           "status": 1,
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }
