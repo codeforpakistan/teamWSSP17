@@ -20,15 +20,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-import com.google.firebase.crash.FirebaseCrash;
-import com.squareup.picasso.Picasso;
 import com.zeeroapps.wssp.fragments.MethodFragment;
 import com.zeeroapps.wssp.fragments.MyComplaintsFragment;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.fragments.ViewPagerFragment;
-import com.zeeroapps.wssp.utils.AppController;
 import com.zeeroapps.wssp.utils.Constants;
 
 public class DrawerActivity extends AppCompatActivity
@@ -45,7 +40,6 @@ public class DrawerActivity extends AppCompatActivity
     TextView btnLogout;
     SharedPreferences sp;
     SharedPreferences.Editor spEdit;
-    private Tracker mTracker;
     private String TAG = "MyApp";
 
     @Override
@@ -70,17 +64,13 @@ public class DrawerActivity extends AppCompatActivity
         }
         initUIComponents();
 
-        AppController appController = (AppController) getApplication();
-        mTracker = appController.getDefaultTracker();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        String scrName = "LOGIN SCREEN";
-        Log.e(TAG, "onResume: "+scrName);
-        mTracker.setScreenName(scrName);
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        String scrName = "DRAWER SCREEN";
+
     }
 
     void initUIComponents(){

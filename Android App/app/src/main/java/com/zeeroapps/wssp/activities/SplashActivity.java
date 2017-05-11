@@ -15,9 +15,6 @@ import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.webkit.WebView;
 import android.widget.ImageView;
-
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.utils.AppController;
@@ -26,7 +23,6 @@ public class SplashActivity extends Activity {
 
     SharedPreferences sp;
     ImageView ivSplash;
-    private Tracker mTracker;
     FirebaseAnalytics analytics;
 
     @Override
@@ -55,9 +51,6 @@ public class SplashActivity extends Activity {
                 finish();
             }
         }, 3000);
-
-        AppController appController = (AppController) getApplication();
-        mTracker = appController.getDefaultTracker();
     }
 
     public void translateAnimation(){
@@ -122,10 +115,6 @@ public class SplashActivity extends Activity {
     protected void onResume() {
         super.onResume();
         String name = "SPLASH SCREEN";
-        Log.i("MyApp", "Setting screen name: " + name);
-        mTracker.setScreenName("Image~" + name);
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-
 
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);

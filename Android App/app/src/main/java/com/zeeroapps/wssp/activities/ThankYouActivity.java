@@ -7,9 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.utils.AppController;
 
@@ -19,7 +16,6 @@ public class ThankYouActivity extends Activity {
     TextView tvEng, tvUrdu;
     Button btnStatus;
     String TAG = "MyApp";
-    Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +48,11 @@ public class ThankYouActivity extends Activity {
         strThanks = strThanks.replace("#C_NO#", complaintNo);
         tvUrdu.setText(strThanks);
 
-        AppController appController = (AppController) getApplication();
-        mTracker = appController.getDefaultTracker();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        String scrName = "LOGIN SCREEN";
-        Log.e(TAG, "onResume: "+scrName);
-        mTracker.setScreenName(scrName);
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        String scrName = "THANK YOU SCREEN";
     }
 }
