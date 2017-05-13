@@ -7,10 +7,10 @@ import android.content.SharedPreferences;
  */
 public class Constants {
 
-    public static final String HOST_URL = "http://103.240.220.52/restapi/";
-    public static final String URL_LOGIN = "http://103.240.220.52/restapi/index.php/main/login_validations";
-    public static final String URL_NEW_COMP = "http://103.240.220.52/restapi/main/add_comp/add";
-    public static final String URL_MY_COMPLAINTS = "http://103.240.220.52/restapi/main/add_comp/list";
-    public static final String URL_MEMBERS = "http://103.240.220.52/restapi/main/members_app";
-    public static final String URL_PROFILE_PIC = "http://103.240.220.52/restapi/uploads/profile/";
+    public static final String HOST_URL = BuildConfig.END_POINT;
+    public static final String URL_LOGIN = BuildConfig.END_POINT + "index.php/main/login_validations";
+    public static final String URL_NEW_COMP = BuildConfig.END_POINT + "main/add_comp/add";
+    public static final String URL_MY_COMPLAINTS = BuildConfig.END_POINT + "main/add_comp/list";
+    public static final String URL_MEMBERS = BuildConfig.END_POINT + "main/members_app";
+    public static final String URL_PROFILE_PIC = BuildConfig.END_POINT + "uploads/profile/";
 }
