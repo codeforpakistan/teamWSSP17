@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -20,6 +22,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.style.ImageSpan;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -31,6 +34,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.viewpagerindicator.CirclePageIndicator;
+import com.viewpagerindicator.IconPageIndicator;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.activities.NewComplaintActivity;
 import com.zeeroapps.wssp.services.MyLocation;
@@ -68,7 +72,9 @@ public class ViewPagerFragment extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPager.setClipToPadding(false);
         viewPager.setPageMargin(5);
-//        tabStrip = (PagerTabStrip) view.findViewById(R.id.tabStrip);
+        tabStrip = (PagerTabStrip) view.findViewById(R.id.tabStrip);
+        tabStrip.setDrawFullUnderline(false);
+        tabStrip.setTabIndicatorColor(Color.parseColor("#ffc200"));
         vpAdapter = new MyViewPagerAdapter(getChildFragmentManager(), mContext);
         viewPager.setAdapter(vpAdapter);
         cpIndicator = (CirclePageIndicator)view.findViewById(R.id.pagerIndicator);
@@ -99,6 +105,8 @@ public class ViewPagerFragment extends Fragment {
     }
 
     private void selectPage(){
+        SharedPreferences sp = mContext.getSharedPreferences(getString(R.string.sp), Context.MODE_PRIVATE);
+        sp.edit().putBoolean("OPEN_CAMERA", true).commit();
         if (checkAndRequestPermissions()) {
             MyLocation myLocation = new MyLocation(mContext);
             if (myLocation.canGetLocation()) {
@@ -256,8 +264,8 @@ public class ViewPagerFragment extends Fragment {
         @Override
         public CharSequence getPageTitle(int position) {
 
-            Drawable myDrawable = ContextCompat.getDrawable(fContext,R.drawable.circle);
             String title = "";
+            SpannableStringBuilder sb = null;
 
             switch (position){
                 case 0:
@@ -279,11 +287,12 @@ public class ViewPagerFragment extends Fragment {
                     title = "";
             }
 
-//            SpannableStringBuilder sb = new SpannableStringBuilder(" " + title);
-//
-//            myDrawable.setBounds(0, 0, myDrawable.getIntrinsicWidth(), myDrawable.getIntrinsicHeight());
-//            ImageSpan span = new ImageSpan(myDrawable, ImageSpan.ALIGN_BASELINE);
-//            sb.setSpan(span, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//            sb = new SpannableStringBuilder(title); // space added before text for convenience
+
+//            Drawable drawable = ContextCompat.getDrawable(fContext,R.drawable.circle);
+//            drawable.setBounds(10, 30, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+//            ImageSpan span = new ImageSpan(drawable, ImageSpan.ALIGN_BASELINE);
+//            sb.setSpan(span, 0, 1, Spanned.SPAN_INTERMEDIATE);
 
             return title;
         }

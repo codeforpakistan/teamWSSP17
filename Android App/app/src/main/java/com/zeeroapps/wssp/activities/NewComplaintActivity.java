@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
@@ -80,7 +81,6 @@ public class NewComplaintActivity extends Activity {
     String complaintTypeListUrdu[] = {"نکاسی آب", "بھرا ہوا گند کا ڈھبہ", "پانی کا مسئلہ", "کوڑا کرکٹ", "کوئی اور مسئلہ"};
 
     SharedPreferences sp;
-    Boolean camFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,23 +88,20 @@ public class NewComplaintActivity extends Activity {
         setContentView(R.layout.activity_new_complaint);
 
         sp = this.getSharedPreferences(getString(R.string.sp), MODE_PRIVATE);
-
         initUIComponents();
-        if (!camFlag) {
-            openCamera();
-            camFlag = true;
-            Log.e(TAG, "onCreate: flag is on");
-        }
-        getTypeIDandTime();
-        Log.e(TAG, "onCreate: " );
 
+        Boolean camFlag = sp.getBoolean("OPEN_CAMERA", false);
+//        if (camFlag) {
+            sp.edit().putBoolean("OPEN_CAMERA", false).commit();
+            openCamera();
+//        }
+        getTypeIDandTime();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         String scrName = "NEW COMPLAINT SCREEN";
-
     }
 
     void initUIComponents(){
@@ -162,7 +159,14 @@ public class NewComplaintActivity extends Activity {
                 e.printStackTrace();
             }
             if (photoFile != null){
-                Uri photoURI = Uri.fromFile(photoFile);
+                Uri photoURI;
+                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M){
+                    photoURI = Uri.fromFile(photoFile);
+                }else{
+                    photoURI = FileProvider.getUriForFile(this,
+                            "com.zeeroapps.wssp.fileprovider",
+                            photoFile);
+                }
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(cameraIntent, REQUEST_CAMERA_CODE);
             }

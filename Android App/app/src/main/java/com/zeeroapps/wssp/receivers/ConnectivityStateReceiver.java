@@ -19,16 +19,16 @@ public class ConnectivityStateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.e(TAG, "BROADCAST RECEIVER RUNNING" );
+        Log.e(TAG, "BROADCAST RECEIVER RUNNING");
         Intent serviceIntent = new Intent(context, NetworkService.class);
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm == null){
+        if (cm == null) {
             return;
-        }else if (cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()){
+        } else if (cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected()) {
             Log.e(TAG, "Connected!");
             context.startService(serviceIntent);
-        }else {
+        } else {
             Log.e(TAG, "Not Connected!");
             context.stopService(serviceIntent);
         }

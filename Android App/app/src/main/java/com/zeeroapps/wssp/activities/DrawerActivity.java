@@ -79,17 +79,17 @@ public class DrawerActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View hv = navigationView.getHeaderView(0);
-        btnNewComp = (LinearLayout) hv.findViewById(R.id.llNewComplaint);
-        btnMyComps = (LinearLayout) hv.findViewById(R.id.llMyComplaints);
-        btnCall1334 = (LinearLayout) hv.findViewById(R.id.llCall1334);
-        btnMethod = (LinearLayout) hv.findViewById(R.id.llMethod);
+        btnNewComp = (LinearLayout) findViewById(R.id.llNewComplaint);
+        btnMyComps = (LinearLayout) findViewById(R.id.llMyComplaints);
+        btnCall1334 = (LinearLayout) findViewById(R.id.llCall1334);
+        btnMethod = (LinearLayout) findViewById(R.id.llMethod);
 //        btnFeedback = (LinearLayout) hv.findViewById(R.id.llFeedback);
-        tvName = (TextView) hv.findViewById(R.id.tvName);
-        tvZone = (TextView) hv.findViewById(R.id.tvZone);
-        tvNC = (TextView) hv.findViewById(R.id.tvNC);
-        tvUC = (TextView) hv.findViewById(R.id.tvUC);
-        ivProfile = (ImageView) hv.findViewById(R.id.ivProfile);
-        btnLogout = (TextView) hv.findViewById(R.id.tvLogout);
+        tvName = (TextView) findViewById(R.id.tvName);
+        tvZone = (TextView) findViewById(R.id.tvZone);
+        tvNC = (TextView) findViewById(R.id.tvNC);
+        tvUC = (TextView) findViewById(R.id.tvUC);
+        ivProfile = (ImageView) findViewById(R.id.ivProfile);
+        btnLogout = (TextView) findViewById(R.id.tvLogout);
 
         btnMenu.setOnClickListener(this);
         btnNewComp.setOnClickListener(this);

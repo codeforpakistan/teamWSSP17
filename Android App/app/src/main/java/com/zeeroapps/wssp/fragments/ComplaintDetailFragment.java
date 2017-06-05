@@ -28,9 +28,9 @@ public class ComplaintDetailFragment extends Fragment {
     String complaintTypeList[] = {"Drainage", "Trash Bin", "Water Supply", "Garbage", "Other"};
     String complaintTypeListUrdu[] = {"نکاسی آب", "بھرا ہوا گند کا ڈھبہ", "پانی کا مسئلہ", "کوڑا کرکٹ", "کوئی اور مسئلہ"};
 
-    String statusList[] = {"Pending Review", "In Progress", "Under Review", "Completed"};
+    String statusList[] = {"Pending Review", "In Progress", "Completed"};
     String statusListUrdu[] = {"زیر جائزہ", "کام جاری ہے", "مکمّل شدہ"};
-    int colorList[] = {Color.RED, Color.parseColor("#ffc200"), Color.parseColor("#ffc200"), Color.GREEN};
+    int colorList[] = {Color.RED, Color.parseColor("#ffc200"), Color.GREEN};
 
     public ComplaintDetailFragment() {
         // Required empty public constructor
