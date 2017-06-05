@@ -55,7 +55,295 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_drawer" />
+        android:fitsSystemWindows="true" >
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:background="@color/clr_wssp_blue"
+            android:gravity="top"
+            android:orientation="vertical"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+            <ImageView
+                android:id="@+id/coverPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bins" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/coverPhoto"
+                android:background="#FFF" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cvProfileImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:cardCornerRadius="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="80dp"
+                app:cardBackgroundColor="#0f90ec">
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_person"
+                    android:tint="#FFF"
+                    android:scaleType="fitCenter"/>
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:id="@+id/llContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cvProfileImage"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Ali Khan"
+                        android:textColor="@color/clr_text_a"
+                        android:textSize="@dimen/text_size_b" />
+
+                    <TextView
+                        android:id="@+id/tvZone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Zone 3"
+                        android:textColor="@color/clr_text_a"
+                        android:textSize="@dimen/text_size_b" />
+
+                    <TextView
+                        android:id="@+id/tvUC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Union Council 40"
+                        android:textColor="@color/clr_text_a"
+                        android:textSize="@dimen/text_size_b" />
+
+                    <TextView
+                        android:id="@+id/tvNC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Neighbourhood Council 4"
+                        android:textColor="@color/clr_text_a"
+                        android:textSize="@dimen/text_size_b" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#FFF" />
+
+                <LinearLayout
+                    android:id="@+id/llNewComplaint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/new_complaint" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center|left"
+                        android:text="New Complaint  |  شکایت جمع کریں"
+                        android:textColor="@color/clr_text_a"
+                        android:textSize="@dimen/text_size_b" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#FFF" />
+
+                <LinearLayout
+                    android:id="@+id/llMyComplaints"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/my_complaints" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center|left"
+                        android:text="My Complaints  | میرے شکایات "
+                        android:textColor="@color/clr_text_a"
+                        android:textSize="@dimen/text_size_b" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#FFF" />
+
+                <LinearLayout
+                    android:id="@+id/llCall1334"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/call" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:text="Call 1334  |  "
+                        android:textColor="@color/clr_text_a"
+                        android:textSize="@dimen/text_size_b" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="1334کو کال ملایں"
+                        android:textColor="@color/clr_text_a"
+                        android:textSize="@dimen/text_size_b" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#FFF" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/how_to" />
+
+                    <LinearLayout
+                        android:id="@+id/llMethod"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="left|center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="How to submit a complaint?"
+                            android:textColor="@color/clr_text_a"
+                            android:textSize="@dimen/text_size_b" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="شکایت جمع کرنے کا طریقہ کار"
+                            android:textColor="@color/clr_text_a"
+                            android:textSize="@dimen/text_size_b" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#FFF" />
+
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<ImageView-->
+                <!--android:layout_width="20dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@drawable/feedback" />-->
+
+                <!--<LinearLayout-->
+                <!--android:id="@+id/llFeedback"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:gravity="left|center"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="left"-->
+                <!--android:text="Feedback about app"-->
+                <!--android:textColor="@color/clr_text_a"-->
+                <!--android:textSize="@dimen/text_size_b" />-->
+
+                <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="left"-->
+                <!--android:text="شکایت جمع کرنے کا طریقہ کار"-->
+                <!--android:textColor="@color/clr_text_a"-->
+                <!--android:textSize="@dimen/text_size_b" />-->
+
+                <!--</LinearLayout>-->
+                <!---->
+                <!--</LinearLayout>-->
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvLogout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:text="Logout | لاگ آوٹ"
+                android:textColor="#FFF"
+                android:background="#1e449f"
+                android:textSize="@dimen/text_size_b" />
+        </RelativeLayout>
+
+
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

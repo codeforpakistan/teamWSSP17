@@ -125,6 +125,13 @@
                         android:text="Complaint Status \n شکایت کی موجودہ حالت"
                         android:textSize="@dimen/text_size_b" />
 
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cvStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="10dp"
+                        android:layout_alignParentRight="true">
+
                     <TextView
                         android:id="@+id/tvCompStatus"
                         android:layout_width="120dp"
@@ -148,6 +155,7 @@
                         android:layout_marginTop="20dp"
                         android:textColor="#FFF"
                         android:textSize="@dimen/text_size_b" />
+                    </android.support.v7.widget.CardView>
 
                 </RelativeLayout>
 

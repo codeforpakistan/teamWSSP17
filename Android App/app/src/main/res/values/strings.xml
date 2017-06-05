@@ -118,6 +118,15 @@
         آپ کی شکایت درج کی جاچکی ہے\n
         #C_NO# آپ کا شکایت نمبر ہے
     </string>
+
+    <string name="feedback_eng">Your complaint number #C_NO# has been resolved.
+        \n
+        Are you satisfied with the results?
+    </string>
+    <string name="feedback_urdu">آپ کی شکایات نمبر #C_NO# حل کی جاچکی ہے
+        \n
+        کیا آپ نتائج سے مطمئن ہیں؟
+    </string>
 </resources>
 
 

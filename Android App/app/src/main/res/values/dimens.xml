@@ -8,6 +8,7 @@
 
     <dimen name="text_size_a">20dp</dimen>
     <dimen name="text_size_b">15dp</dimen>
+    <dimen name="text_size_c">12dp</dimen>
 
     <dimen name="top_btm_tv_sizes">25dp</dimen>
     <dimen name="btn_sizes_main_page">150dp</dimen>

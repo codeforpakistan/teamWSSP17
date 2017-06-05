@@ -50,12 +50,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -63,19 +63,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Complaint No. "
+                        android:text="Complaint # "
+                        android:layout_alignParentLeft="true"
                         android:textColor="@color/clr_wssp_blue"
-                        android:textSize="@dimen/text_size_b" />
+                        android:textSize="@dimen/text_size_c" />
 
                     <TextView
                         android:id="@+id/tvComplaintNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12345"
+                        android:text="1234567"
+                        android:layout_alignParentRight="true"
                         android:textStyle="bold"
                         android:textColor="@color/clr_wssp_blue"
                         android:textSize="@dimen/text_size_b" />
-                </LinearLayout>
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -95,6 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Status"
+                    android:gravity="left"
                     android:layout_below="@+id/tvComplaintStatus"
                     android:textSize="@dimen/text_size_b"/>
                 </LinearLayout>
