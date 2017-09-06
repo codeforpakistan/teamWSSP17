@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.utils.AppController;
 
@@ -24,20 +25,20 @@ public class ComplaintDetailFragment extends Fragment {
     TextView tvNo, tvComplaintStatus, tvComplaintStatusUrdu, tvDandT, tvTypeEng, tvTypeUrdu, tvDetail;
     NetworkImageView ivCImage;
     private static ImageLoader imageLoader;
+    FirebaseAnalytics mFBAnalytics;
 
     String complaintTypeList[] = {"Drainage", "Trash Bin", "Water Supply", "Garbage", "Other"};
     String complaintTypeListUrdu[] = {"نکاسی آب", "بھرا ہوا گند کا ڈھبہ", "پانی کا مسئلہ", "کوڑا کرکٹ", "کوئی اور مسئلہ"};
 
     String statusList[] = {"Pending Review", "In Progress", "Completed"};
     String statusListUrdu[] = {"زیر جائزہ", "کام جاری ہے", "مکمّل شدہ"};
-    int colorList[] = {Color.RED, Color.parseColor("#ffc200"), Color.GREEN};
+    int colorList[] = {Color.RED, Color.parseColor("#ffc200"), Color.parseColor("#FF15762A")};
 
     public ComplaintDetailFragment() {
         // Required empty public constructor
     }
 
     public static ComplaintDetailFragment newInstance() {
-        
         Bundle args = new Bundle();
         
         ComplaintDetailFragment fragment = new ComplaintDetailFragment();
@@ -58,6 +59,9 @@ public class ComplaintDetailFragment extends Fragment {
         tvTypeUrdu = (TextView) view.findViewById(R.id.tvTypeUrdu);
         tvDetail = (TextView) view.findViewById(R.id.tvCompDetail);
         tvDetail.setMovementMethod(new ScrollingMovementMethod());
+
+        mFBAnalytics = FirebaseAnalytics.getInstance(getContext());
+        fbAnalytics();
 
         if (imageLoader == null)
             imageLoader = AppController.getInstance().getImageLoader();
@@ -96,6 +100,12 @@ public class ComplaintDetailFragment extends Fragment {
             tvTypeUrdu.setText(complaintTypeListUrdu[4]);
         }
         return view;
+    }
+
+    public void fbAnalytics(){
+        Bundle bundle = new Bundle();
+        bundle.putString("complaint_number", getArguments().getString("C_NO"));
+        mFBAnalytics.logEvent("my_complaints", bundle);
     }
 
 }

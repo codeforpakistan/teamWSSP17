@@ -37,6 +37,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.SQLite.DatabaseHelper;
@@ -81,11 +82,15 @@ public class NewComplaintActivity extends Activity {
     String complaintTypeListUrdu[] = {"نکاسی آب", "بھرا ہوا گند کا ڈھبہ", "پانی کا مسئلہ", "کوڑا کرکٹ", "کوئی اور مسئلہ"};
 
     SharedPreferences sp;
+    FirebaseAnalytics mFBAnalytics;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_complaint);
+
+        mFBAnalytics = FirebaseAnalytics.getInstance(this);
 
         sp = this.getSharedPreferences(getString(R.string.sp), MODE_PRIVATE);
         initUIComponents();
@@ -234,7 +239,9 @@ public class NewComplaintActivity extends Activity {
      * @return
      */
      private String encodeImage(){
-        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
+         final BitmapFactory.Options options = new BitmapFactory.Options();
+         options.inSampleSize = 8;
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, options);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 25, stream);
         byte[] array = stream.toByteArray();
@@ -270,6 +277,11 @@ public class NewComplaintActivity extends Activity {
             storeDataInSQLite();
             registerBroadcast();
         }
+
+        Bundle bundle = new Bundle();
+        bundle.putString("complaint_type", complaintType);
+        bundle.putString("complaint_area", etAddress.getText().toString());
+        mFBAnalytics.logEvent("complaint", bundle);
     }
 
     public void submitData(View v){

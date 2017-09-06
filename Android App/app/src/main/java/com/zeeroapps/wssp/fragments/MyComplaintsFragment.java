@@ -49,6 +49,7 @@ public class MyComplaintsFragment extends Fragment {
     private String JSON_TAG = "JSON_ARRAY_TAG";
 
     SharedPreferences sp;
+    private String compNo;
 
     public MyComplaintsFragment() {
         // Required empty public constructor
@@ -58,7 +59,7 @@ public class MyComplaintsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mContext = inflater.getContext();
-        // Inflate the layout for this fragment
+        compNo = getArguments().getString("COMPLAINT_NUMBER");
         View v = inflater.inflate(R.layout.fragment_my_complaints, container, false);
         sp = inflater.getContext().getSharedPreferences(getString(R.string.sp), Context.MODE_PRIVATE);
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
@@ -91,6 +92,9 @@ public class MyComplaintsFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 Log.e(TAG, "Response: "+response );
+                if (response.toString().contains("[]")) {
+                    Snackbar.make(layoutMain, "No complaints!", Snackbar.LENGTH_INDEFINITE).setActionTextColor(Color.RED).show();
+                }
                 try {
                 JSONArray jArr = new JSONArray(response);
                 ModelComplaints complaint;
@@ -110,6 +114,9 @@ public class MyComplaintsFragment extends Fragment {
                     }
 
                     customAdapter.notifyDataSetChanged();
+                    if (compNo != null){
+                        filter(compNo);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e(TAG, e.toString());
@@ -139,6 +146,22 @@ public class MyComplaintsFragment extends Fragment {
         };
 
         AppController.getInstance().addToRequestQueue(jsonReq, JSON_TAG);
+    }
+
+    public void filter(String text) {
+        ArrayList<ModelComplaints> complaintsListCopy = new ArrayList<ModelComplaints>(compList);
+        compList.clear();
+        if(text.isEmpty()){
+            compList.addAll(complaintsListCopy);
+        } else {
+            text = text.toLowerCase();
+            for(ModelComplaints item: complaintsListCopy){
+                if(item.getcNumber().toLowerCase().contains(text)){
+                    compList.add(item);
+                }
+            }
+        }
+        customAdapter.notifyDataSetChanged();
     }
 
 

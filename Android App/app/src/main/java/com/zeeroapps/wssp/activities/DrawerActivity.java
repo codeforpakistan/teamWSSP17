@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.zeeroapps.wssp.fragments.MethodFragment;
 import com.zeeroapps.wssp.fragments.MyComplaintsFragment;
 import com.zeeroapps.wssp.R;
@@ -41,6 +42,7 @@ public class DrawerActivity extends AppCompatActivity
     SharedPreferences sp;
     SharedPreferences.Editor spEdit;
     private String TAG = "MyApp";
+    private FirebaseAnalytics mFBAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +51,24 @@ public class DrawerActivity extends AppCompatActivity
 
 //        FirebaseCrash.report(new Exception("This is an exception!"));
 
+        mFBAnalytics = FirebaseAnalytics.getInstance(this);
         fragmentManager = getSupportFragmentManager();
 
         sp = this.getSharedPreferences(getString(R.string.sp), this.MODE_PRIVATE);
         spEdit = sp.edit();
 
+        Log.e(TAG, "onCreate: FB TOKEN "+sp.getString("FB_TOKEN", null) );
+
         Intent intent = getIntent();
         if (intent.getExtras() != null){
              if (intent.getExtras().getBoolean("CALLED_FROM_THANK_YOU_ACTIVITY")){
-                 fragmentManager.beginTransaction().replace(R.id.container, MyComplaintsFragment.newInstance()).commit();
+                 MyComplaintsFragment myComplaints = new MyComplaintsFragment();
+                 if (intent.getExtras().getString("COMPLAINT_NUMBER") != null) {
+                     Bundle bundle = new Bundle();
+                     bundle.putString("COMPLAINT_NUMBER", intent.getExtras().getString("COMPLAINT_NUMBER"));
+                     myComplaints.setArguments(bundle);
+                 }
+                 fragmentManager.beginTransaction().replace(R.id.container, myComplaints).commit();
              }
         }else {
             fragmentManager.beginTransaction().replace(R.id.container, ViewPagerFragment.newInstance()).commit();
@@ -131,6 +142,10 @@ public class DrawerActivity extends AppCompatActivity
                 changeFragment(MyComplaintsFragment.newInstance());
                 break;
             case R.id.llCall1334:
+                Bundle bundle = new Bundle();
+                bundle.putString("user_phone_number", sp.getString(getString(R.string.spUMobile), null));
+                mFBAnalytics.logEvent("call_1334", bundle);
+
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("tel://1334")));
                 break;
             case R.id.llMethod:

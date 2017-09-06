@@ -30,6 +30,7 @@ public class ThankYouActivity extends Activity {
             public void onClick(View view) {
                 Intent intent = new Intent(ThankYouActivity.this, DrawerActivity.class);
                 intent.putExtra("CALLED_FROM_THANK_YOU_ACTIVITY", true);
+                intent.putExtra("COMPLAINT_NUMBER", complaintNo);
                 startActivity(intent);
                 finish();
             }
@@ -53,6 +54,5 @@ public class ThankYouActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        String scrName = "THANK YOU SCREEN";
     }
 }

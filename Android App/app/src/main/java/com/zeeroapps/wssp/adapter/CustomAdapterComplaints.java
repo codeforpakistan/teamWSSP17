@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -137,11 +138,12 @@ public class CustomAdapterComplaints extends RecyclerView.Adapter<CustomAdapterC
             }else if (status.toLowerCase().contains("completed")){
                 tvComplaintStatus.setText("Completed");
                 tvComplaintStatusUrdu.setText(statusListUrdu[2]);
-                tvComplaintStatus.setTextColor(Color.GREEN);
-                tvComplaintStatusUrdu.setTextColor(Color.GREEN);
+                tvComplaintStatus.setTextColor(Color.parseColor("#FF15762A"));
+                tvComplaintStatusUrdu.setTextColor(Color.parseColor("#FF15762A"));
             }
             tvComplaintNumber.setText(mc.getcNumber());
             tvDateAndTime.setText(mc.getcDateAndTime());
         }
     }
+
 }

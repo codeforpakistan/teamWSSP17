@@ -52,8 +52,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = "MyApp";
     private String tag_json_obj = "JSON_OBJECT";
+    private String token;
 
     String passwordSHA1;
+    private String phoneNo, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,11 +88,14 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
     public void validateFields(){
-        if (TextUtils.isEmpty(etPhone.getText())){
+        phoneNo = etPhone.getText().toString();
+        password = etPass.getText().toString();
+
+        if (TextUtils.isEmpty(phoneNo)){
             etPhone.requestFocus();
             etPhone.setError("Enter valid phone number!");
             return;
-        }else if (etPass.getText().toString().length() < 5){
+        }else if (password.length() < 5){
             etPass.requestFocus();
             etPass.setError("Password must be 5 characters long!");
             return;
@@ -117,6 +122,19 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    public void forgotPassword(View v){
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"admin@wssp.com"});
+        i.putExtra(Intent.EXTRA_SUBJECT, "Forgot my account password!");
+        i.putExtra(Intent.EXTRA_TEXT   , "Kindly create a new password for me.");
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(LoginActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void loginWS() {
         try {
             passwordSHA1 = SHA1.encrypt(etPass.getText().toString());
@@ -135,15 +153,16 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 try {
                     JSONObject jObj = new JSONObject(response.toString());
                     String status = jObj.getString("status");
-
                     Snackbar.make(mainLayout, status, Snackbar.LENGTH_LONG).show();
                     if (status.toLowerCase().contains("success")) {
+                        int roll = Integer.parseInt(jObj.getString("roll"));
+                        if (roll != 0) {
+                            Snackbar.make(mainLayout, "Incorrect username or password!", Snackbar.LENGTH_LONG).show();
+                            return;
+                        }
                         getMemberDetailsWS();
-
-//                        Intent intent = new Intent(LoginActivity.this, DrawerActivity.class);
-//                        startActivity(intent);
-//                        finish();
                     }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -164,8 +183,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("mobilenumber", etPhone.getText().toString());
-                params.put("password", etPass.getText().toString());
+                params.put("mobilenumber", phoneNo);
+                params.put("password", password);
+                params.put("token_id", sp.getString("FB_TOKEN", null));
                 return params;
             }
         };

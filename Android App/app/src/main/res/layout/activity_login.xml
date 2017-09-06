@@ -86,6 +86,7 @@
             android:layout_marginTop="@dimen/my_margin"
             android:gravity="center"
             android:textSize="@dimen/text_size_b"
+            android:onClick="forgotPassword"
             android:text="Having problem in logging in?" />
 
         <TextView
@@ -93,6 +94,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="@dimen/text_size_b"
+            android:onClick="forgotPassword"
             android:text="لاگ ان ہونے میں کوی مسلہ ہے؟" />
 
     </LinearLayout>
