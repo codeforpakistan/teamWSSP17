@@ -1,7 +1,7 @@
 # teamWSSP17
 ## Making Peshawar Cleaner and Proud!
 
-![alt text](http://codeforpakistan.org/wp-content/uploads/2017/08/all-complaints-2-2-1024x370.png
+![alt text](http://codeforpakistan.org/wp-content/uploads/2017/08/all-complaints-2-2-1024x370.png)
 
 
 The application, Safa Pekhawar makes it easy to make complaints to Water and Sanitation Services (WSSP) Peshawar with just a few clicks. The application takes pictures and automatically collects GPS coordinates from the user and sends it to Management Information System (MIS) where the department reviews the complaint and forwards it to the relevant zonal office. This application has made the process much faster as compared to earlier when complaint submissions was completely manual and required much more time consuming.
