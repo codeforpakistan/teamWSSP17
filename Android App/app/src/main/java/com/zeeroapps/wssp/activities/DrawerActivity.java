@@ -35,7 +35,7 @@ public class DrawerActivity extends AppCompatActivity
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ImageButton btnMenu;
-    LinearLayout btnNewComp, btnMyComps, btnCall1334, btnMethod, btnFeedback;
+    LinearLayout btnNewComp, btnMyComps, btnCall1334, btnMethod, btnFeedback, llDuplicatebill,llNewDomestic ;
     TextView tvName, tvZone, tvUC, tvNC;
     ImageView ivProfile;
     TextView btnLogout;
@@ -94,6 +94,8 @@ public class DrawerActivity extends AppCompatActivity
         btnMyComps = (LinearLayout) findViewById(R.id.llMyComplaints);
         btnCall1334 = (LinearLayout) findViewById(R.id.llCall1334);
         btnMethod = (LinearLayout) findViewById(R.id.llMethod);
+        llDuplicatebill = (LinearLayout) findViewById(R.id.llDuplicatebill);
+        llNewDomestic = (LinearLayout) findViewById(R.id.llNewDomestic);
 //        btnFeedback = (LinearLayout) hv.findViewById(R.id.llFeedback);
         tvName = (TextView) findViewById(R.id.tvName);
         tvZone = (TextView) findViewById(R.id.tvZone);
@@ -107,6 +109,9 @@ public class DrawerActivity extends AppCompatActivity
         btnMyComps.setOnClickListener(this);
         btnCall1334.setOnClickListener(this);
         btnMethod.setOnClickListener(this);
+        llDuplicatebill.setOnClickListener(this);
+        llNewDomestic.setOnClickListener(this);
+
 //        btnFeedback.setOnClickListener(this);
         btnLogout.setOnClickListener(this);
 
@@ -137,6 +142,14 @@ public class DrawerActivity extends AppCompatActivity
                 break;
             case R.id.llNewComplaint:
                 changeFragment(ViewPagerFragment.newInstance());
+                break;
+            case R.id.llDuplicatebill:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://202.166.167.118/wssp_online_bill_generator"));
+                startActivity(browserIntent);
+                break;
+            case R.id.llNewDomestic:
+                Intent domesticIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://202.166.167.118/wssp_online_dcp_form/"));
+                startActivity(domesticIntent);
                 break;
             case R.id.llMyComplaints:
                 changeFragment(MyComplaintsFragment.newInstance());

@@ -153,14 +153,19 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 try {
                     JSONObject jObj = new JSONObject(response.toString());
                     String status = jObj.getString("status");
+
                     Snackbar.make(mainLayout, status, Snackbar.LENGTH_LONG).show();
                     if (status.toLowerCase().contains("success")) {
+
                         int roll = Integer.parseInt(jObj.getString("roll"));
                         if (roll != 0) {
                             Snackbar.make(mainLayout, "Incorrect username or password!", Snackbar.LENGTH_LONG).show();
+                            avi.hide();
                             return;
                         }
                         getMemberDetailsWS();
+
+
                     }
 
                 } catch (JSONException e) {
@@ -193,6 +198,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
     public void getMemberDetailsWS() {
+        Log.e("member details", "working" );
         avi.show();
         StringRequest jsonReq = new StringRequest(Request.Method.POST, Constants.URL_MEMBERS, new Response.Listener<String>() {
             @Override
