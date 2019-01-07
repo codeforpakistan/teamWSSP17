@@ -81,9 +81,22 @@
             android:textColor="#fff" />
 
         <TextView
+            android:id="@+id/register_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/my_margin"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_b"
+            android:onClick="gotoRegister"
+            android:text="Register with us"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:gravity="center"
             android:textSize="@dimen/text_size_b"
             android:onClick="forgotPassword"

@@ -94,7 +94,8 @@
                 android:gravity="center"
                 android:text="Zone 4"
                 android:textColor="@color/clr_wssp_blue"
-                android:textSize="@dimen/text_size_b" />
+                android:textSize="@dimen/text_size_b"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tvUC"
@@ -104,7 +105,8 @@
                 android:gravity="center"
                 android:text="Union Council 4"
                 android:textColor="@color/clr_wssp_blue"
-                android:textSize="@dimen/text_size_b" />
+                android:textSize="@dimen/text_size_b"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tvNC"
@@ -115,13 +117,15 @@
                 android:text="Neighbourhood Council 4"
                 android:textColor="@color/clr_wssp_blue"
                 android:textSize="@dimen/text_size_b"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                android:visibility="gone"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dp"
-                android:background="#555" />
+                android:background="#555"
+                android:visibility="gone"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
