@@ -3,10 +3,13 @@ package com.zeeroapps.wssp.activities;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
@@ -18,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -49,6 +53,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     AVLoadingIndicatorView avi;
     SharedPreferences sp;
     SharedPreferences.Editor spEdit;
+    TextView register_text;
 
     private static final String TAG = "MyApp";
     private String tag_json_obj = "JSON_OBJECT";
@@ -81,6 +86,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnHelp = (Button) findViewById(R.id.btnHelp);
         avi = (AVLoadingIndicatorView) findViewById(R.id.loadingIndicator);
+        register_text = (TextView) findViewById(R.id.register_text);
+        register_text.setPaintFlags(register_text.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
         avi.hide();
 
         btnLogin.setOnClickListener(this);
@@ -91,7 +98,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         phoneNo = etPhone.getText().toString();
         password = etPass.getText().toString();
 
-        if (TextUtils.isEmpty(phoneNo)){
+        if (TextUtils.isEmpty(phoneNo) || phoneNo.length() < 11){
             etPhone.requestFocus();
             etPhone.setError("Enter valid phone number!");
             return;
@@ -123,7 +130,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
     public void forgotPassword(View v){
-        Intent i = new Intent(Intent.ACTION_SEND);
+       /* Intent i = new Intent(Intent.ACTION_SENDTO);
         i.setType("message/rfc822");
         i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"admin@wssp.com"});
         i.putExtra(Intent.EXTRA_SUBJECT, "Forgot my account password!");
@@ -133,6 +140,27 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(LoginActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
         }
+*/
+
+
+        String mailto = "mailto:ebtihaj@codeforpakistan.org" +
+   "?cc=" + "nazimdin@codeforpakistan.org" +
+   "&subject=" + Uri.encode("Forgot my WSSP account password!") +
+   "&body=" + Uri.encode("Kindly create a new password for me.");
+
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setData(Uri.parse(mailto));
+
+        try {
+            startActivity(emailIntent);
+        } catch (ActivityNotFoundException e) {
+            //TODO: Handle case where no email app is available
+        }
+
+    }
+
+    public void gotoRegister(View v){
+        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
     }
 
     public void loginWS() {
