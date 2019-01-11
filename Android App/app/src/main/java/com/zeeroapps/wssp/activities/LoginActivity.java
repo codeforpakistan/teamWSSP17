@@ -29,6 +29,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.crashlytics.android.Crashlytics;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.receivers.ConnectivityStateReceiver;
@@ -44,6 +45,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+
+import io.fabric.sdk.android.Fabric;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
@@ -69,7 +72,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         sp = this.getSharedPreferences(getString(R.string.sp), this.MODE_PRIVATE);
         spEdit = sp.edit();
-
+        Fabric.with(this, new Crashlytics());
         initUIControls();
     }
 

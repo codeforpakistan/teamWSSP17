@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -15,9 +16,13 @@ import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.webkit.WebView;
 import android.widget.ImageView;
+
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.utils.AppController;
+
+import io.fabric.sdk.android.Fabric;
 
 public class SplashActivity extends Activity {
 
@@ -35,6 +40,7 @@ public class SplashActivity extends Activity {
         sp = getSharedPreferences(getString(R.string.sp), MODE_PRIVATE);
 
         analytics = FirebaseAnalytics.getInstance(this);
+        Fabric.with(this, new Crashlytics());
 
         ivSplash = (ImageView) findViewById(R.id.ivSplash);
         scaleAnimation();
@@ -121,4 +127,6 @@ public class SplashActivity extends Activity {
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "IMAGE");
         analytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
+
+
 }

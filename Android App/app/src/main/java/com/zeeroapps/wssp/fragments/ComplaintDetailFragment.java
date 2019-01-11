@@ -12,9 +12,12 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.utils.AppController;
+
+import io.fabric.sdk.android.Fabric;
 
 
 /**
@@ -50,6 +53,7 @@ public class ComplaintDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_complaint_detail, container, false);
+        Fabric.with(getActivity(), new Crashlytics());
         ivCImage = (NetworkImageView) view.findViewById(R.id.ivPreview);
         tvNo = (TextView) view.findViewById(R.id.tvCompNo);
         tvComplaintStatus = (TextView) view.findViewById(R.id.tvCompStatus);

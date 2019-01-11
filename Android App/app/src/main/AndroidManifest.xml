@@ -18,6 +18,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -89,6 +90,10 @@
             android:label="Registration"
             android:theme="@style/RegAppTheme"
             android:parentActivityName=".activities.LoginActivity"/>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+        android:value="f6be19f0dd38c1a4b5d774d9fa906f8b7d108859"/>
     </application>
 
 </manifest>
