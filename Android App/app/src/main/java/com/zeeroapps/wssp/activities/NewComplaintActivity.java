@@ -37,6 +37,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zeeroapps.wssp.R;
@@ -56,6 +57,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import io.fabric.sdk.android.Fabric;
 
 public class NewComplaintActivity extends Activity {
 
@@ -91,7 +94,7 @@ public class NewComplaintActivity extends Activity {
         setContentView(R.layout.activity_new_complaint);
 
         mFBAnalytics = FirebaseAnalytics.getInstance(this);
-
+        Fabric.with(this, new Crashlytics());
         sp = this.getSharedPreferences(getString(R.string.sp), MODE_PRIVATE);
         initUIComponents();
 

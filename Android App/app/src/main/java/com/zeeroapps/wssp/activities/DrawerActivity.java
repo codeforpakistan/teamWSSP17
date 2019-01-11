@@ -20,12 +20,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.zeeroapps.wssp.fragments.MethodFragment;
 import com.zeeroapps.wssp.fragments.MyComplaintsFragment;
 import com.zeeroapps.wssp.R;
 import com.zeeroapps.wssp.fragments.ViewPagerFragment;
 import com.zeeroapps.wssp.utils.Constants;
+
+import io.fabric.sdk.android.Fabric;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -50,7 +53,7 @@ public class DrawerActivity extends AppCompatActivity
         setContentView(R.layout.activity_drawer);
 
 //        FirebaseCrash.report(new Exception("This is an exception!"));
-
+        Fabric.with(this, new Crashlytics());
         mFBAnalytics = FirebaseAnalytics.getInstance(this);
         fragmentManager = getSupportFragmentManager();
 

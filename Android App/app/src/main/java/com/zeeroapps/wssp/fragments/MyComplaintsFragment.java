@@ -20,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.crashlytics.android.Crashlytics;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zeeroapps.wssp.Model.ModelComplaints;
 import com.zeeroapps.wssp.R;
@@ -34,6 +35,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,6 +65,7 @@ public class MyComplaintsFragment extends Fragment {
         compNo = getArguments().getString("COMPLAINT_NUMBER");
         View v = inflater.inflate(R.layout.fragment_my_complaints, container, false);
         sp = inflater.getContext().getSharedPreferences(getString(R.string.sp), Context.MODE_PRIVATE);
+        Fabric.with(getActivity(), new Crashlytics());
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
         layoutMain = (RelativeLayout) v.findViewById(R.id.mainLayout);
         avi = (AVLoadingIndicatorView) v.findViewById(R.id.loadingIndicator);

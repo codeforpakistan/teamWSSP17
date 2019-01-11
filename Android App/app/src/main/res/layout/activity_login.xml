@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Phone Number  |  فون نمبر"
-                android:maxLength="14"
+                android:maxLength="11"
                 android:imeOptions="actionNext"
                 android:inputType="phone" />
         </android.support.design.widget.TextInputLayout>
